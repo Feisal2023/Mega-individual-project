@@ -46,6 +46,11 @@ async function getWords() {
   const data = await response.json();
   return data;
 }
+function checkIfWordExists(word) {
+  const wordsFromStorage = getAllElementsFromStorage();
+  return wordsFromStorage.some((element) => element.word.toLowerCase() === word.toLowerCase());
+}
+
 // show word all function
 
 async function showWordAll() {
@@ -61,8 +66,17 @@ async function showWordAll() {
     const words= await getWords();
     const word = words.find((element) => element.word.toLowerCase() === searchWord.value.toLowerCase());
  if(word) {
+  
   const checking = document.querySelector('.checking');
   checking.style.visibility = 'visible';
+
+   if (checkIfWordExists(word.word)) {
+    const checking = document.querySelector('.checking');
+    checking.style.visibility = 'hidden';
+    showError(searchWord, 'That word already checked!');
+    return searchWord.value;
+  }
+ 
     const allElement = document.createElement('div');
     allElement.classList.add('AllElement');
     allElement.innerHTML = `
@@ -90,6 +104,8 @@ async function showWordAll() {
     wordDisplay.appendChild(allElement);
 
  } else {
+  const checking = document.querySelector('.checking');
+  checking.style.visibility = 'hidden';
   showError(searchWord, 'Word not found');
  }
    
@@ -113,6 +129,13 @@ async function showWordDefinition() {
  if(word) {
   const checking = document.querySelector('.checking');
   checking.style.visibility = 'visible';
+  
+  if (checkIfWordExists(word.word)) {
+    const checking = document.querySelector('.checking');
+    checking.style.visibility = 'hidden';
+    showError(searchWord, 'That word already checked!');
+    return searchWord.value;
+  }
     const definitionEl = document.createElement('div');
     definitionEl.classList.add('definitionEl');
     definitionEl.innerHTML = `
@@ -128,6 +151,8 @@ async function showWordDefinition() {
     wordDisplay.appendChild(definitionEl);
 
  } else {
+  const checking = document.querySelector('.checking');
+  checking.style.visibility = 'hidden';
   showError(searchWord, 'Word not found');
  }
    
@@ -151,6 +176,13 @@ async function showWordExamples() {
  if(word) {
   const checking = document.querySelector('.checking');
   checking.style.visibility = 'visible';
+  
+  if (checkIfWordExists(word.word)) {
+    const checking = document.querySelector('.checking');
+    checking.style.visibility = 'hidden';
+    showError(searchWord, 'That word already checked!');
+    return searchWord.value;
+  }
     const examplesEl = document.createElement('div');
     examplesEl.classList.add('examplesEl');
     examplesEl.innerHTML = `
@@ -166,6 +198,8 @@ async function showWordExamples() {
     wordDisplay.appendChild(examplesEl);
 
  } else {
+  const checking = document.querySelector('.checking');
+  checking.style.visibility = 'hidden';
   showError(searchWord, 'Word not found');
  }
    
@@ -186,6 +220,13 @@ async function showWordSynonyms() {
     const words= await getWords();
     const word = words.find((element) => element.word.toLowerCase() === searchWord.value.toLowerCase());
  if(word) {
+  
+  if (checkIfWordExists(word.word)) {
+    const checking = document.querySelector('.checking');
+    checking.style.visibility = 'hidden';
+    showError(searchWord, 'That word already checked!');
+    return searchWord.value;
+  }
   const checking = document.querySelector('.checking');
   checking.style.visibility = 'visible';
     const synonymsEl = document.createElement('div');
@@ -203,6 +244,8 @@ async function showWordSynonyms() {
     wordDisplay.appendChild(synonymsEl);
 
  } else {
+  const checking = document.querySelector('.checking');
+  checking.style.visibility = 'hidden';
   showError(searchWord, 'Word not found');
  }
    
@@ -225,6 +268,14 @@ async function showWordAntonyms() {
  if(word) {
   const checking = document.querySelector('.checking');
   checking.style.visibility = 'visible';
+
+  
+  if (checkIfWordExists(word.word)) {
+    const checking = document.querySelector('.checking');
+    checking.style.visibility = 'hidden';
+    showError(searchWord, 'That word already checked!');
+    return searchWord.value;
+  }
     const antonymsEl = document.createElement('div');
     antonymsEl.classList.add('antonymsEl');
     antonymsEl.innerHTML = `
@@ -240,6 +291,8 @@ async function showWordAntonyms() {
     wordDisplay.appendChild(antonymsEl);
 
  } else {
+  const checking = document.querySelector('.checking');
+  checking.style.visibility = 'hidden';
   showError(searchWord, 'Word not found');
  }
    
@@ -268,17 +321,16 @@ function addAllElementsToLocalStorage() {
             synonyms: word.synonyms,
             antonyms: word.antonyms,
           }
-          addToStorage.push(allElements);
-          localStorage.setItem('allElements', JSON.stringify(addToStorage));
+           addToStorage.push(allElements);
+            localStorage.setItem('allElements', JSON.stringify(addToStorage));
         }
         setTimeout(() => {
           isCheckingAll.checked = '';
+          searchWord.value = '';
         }, 1000)
 
       }
     })
-
-
   }
 
 }
@@ -296,5 +348,4 @@ form.addEventListener('change', (e) => {
 isCheckingAll.addEventListener('change', function(e) {
   e.preventDefault();
   addAllElementsToLocalStorage();
-  addWorAndDefinitionToLocalStorage()
 });
