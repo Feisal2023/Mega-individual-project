@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.pages {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-bottom: 30px;
+  justify-content: space-between;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+.container form {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+.input-message small {
+  display: block;
+  color: red;
+  visibility: hidden;
+}
+.input-message.error input {
+  border: 1px solid red;
+}
+.input-message.success input {
+  border: 1px solid green;
+}
+form input {
+  width: 130%;
+  padding: 10px 15px;
+}
+
+form select {
+  width: 100%;
+  padding: 10px 15px;
+}
+.navigator-icon img {
+  width: 30px;
+  height: 30px;
+}
+.checking  {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 20px;
+}
+.checking input {
+padding: 5px 10px;
+width: 20%;
+}
+.checking {
+  visibility: hidden;
+}
+.word-element {
+  margin: 20px 0px;
+}
+
+.word-element p {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+.word-element p span {
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.loader {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  transition: opacity 0.3s ease-in;
+  /* margin-top: 20px; */
+}
+
+.loader.show {
+  display: flex;
+  opacity: 1;
+}
+
+.circle {
+  background-color: blue;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 5px;
+  animation: bounce 0.5s ease-in infinite;
+}
+
+.circle:nth-of-type(2) {
+  animation-delay: 0.1s;
+}
+
+.circle:nth-of-type(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Words Meaning Checker</title>
+</head>
+<body>
+  <div class="container">
+    <div class="pages">
+      <h3 class="home">Home</h3>
+      <h3 class="words-stored"><a href="memory.html">Memory</a></h3>
+    </div>
+    <form id="form">
+      <div class="form-group input-message">
+        <input type="text" class="searchWord" id="searchWord" placeholder="Enter A word">
+        <small>Error Message</small>
+      </div>
+      <div class="form-group">
+        <select  id="selection">
+          <option value="select" id="select">Select</option>
+          <option value="All" id="all">All</option>
+          <option value="Definition" id="definition">Definition</option>
+          <option value="Examples" id="examples">Examples</option>
+          <option value="Synonyms" id="synonyms">Synonyms</option>
+          <option value="Antonyms" id="antonyms">Antonyms</option>
+        </select>
+      </div>
+    </form>
+    <div id="wordDisplay">
+   </div>
+    <div class="checking">
+      <h1>Stored:</h1>
+      <input type="checkbox" class="check-box">
+      </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>
